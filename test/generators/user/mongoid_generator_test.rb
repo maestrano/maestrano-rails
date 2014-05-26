@@ -1,7 +1,7 @@
 require "test_helper"
 
 if TEST_ORM == :mongoid
-  require "generators/mongoid/user_generator"
+  require "generators/mongoid/maestrano_user_generator"
 
   class MongoidUserGeneratorTest < Rails::Generators::TestCase
     tests Mongoid::Generators::MaestranoUserGenerator

@@ -1,7 +1,7 @@
 require "test_helper"
 
 if TEST_ORM == :active_record
-  require "generators/active_record/user_generator"
+  require "generators/active_record/maestrano_user_generator"
   
   class ActiveRecordUserGeneratorTest < Rails::Generators::TestCase
     tests ActiveRecord::Generators::MaestranoUserGenerator
