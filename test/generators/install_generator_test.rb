@@ -9,4 +9,9 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     run_generator
     assert_file "config/initializers/maestrano.rb"
   end
+  
+  should "create the maestrano/auth/saml controller" do
+    run_generator
+    assert_file "app/controllers/maestrano/auth/saml_controller.rb"
+  end
 end
