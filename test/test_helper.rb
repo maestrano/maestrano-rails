@@ -21,3 +21,4 @@ end
 require "rails/generators/test_case"
 require "generators/maestrano/install_generator"
 require "generators/maestrano/user_generator"
+require "generators/maestrano/group_generator"

@@ -5,7 +5,7 @@ module Maestrano
       def model_contents
         buffer = <<-CONTENT
   # Enable Maestrano for this model
-  maestrano_user_via :provider, :uid
+  maestrano_#{model_type}_via :provider, :uid
 
 CONTENT
         buffer += <<-CONTENT if needs_attr_accessible?
@@ -15,7 +15,11 @@ CONTENT
 CONTENT
         buffer
       end
-
+      
+      def model_type
+        self.class.name.split("::").last.gsub("Maestrano","").gsub("Generator","").downcase
+      end
+      
       def needs_attr_accessible?
         rails_3? && !strong_parameters_enabled?
       end
