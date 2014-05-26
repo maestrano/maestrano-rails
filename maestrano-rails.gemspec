@@ -7,13 +7,13 @@ require "maestrano-rails/version"
 Gem::Specification.new do |s|
   s.name        = "maestrano-rails"
   s.version     = MaestranoRails::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MaestranoRails."
-  s.description = "TODO: Description of MaestranoRails."
+  s.authors     = ["Arnaud Lachaume"]
+  s.email       = ["arnaud.lachaume@maestrano.com"]
+  s.homepage    = 'https://maestrano.com'
+  s.summary     = 'Rails plugin for Maestrano API'
+  s.description = 'Maestrano is the next generation marketplace for SME applications. See https://maestrano.com for details.'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.3"
