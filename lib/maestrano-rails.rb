@@ -1,2 +1,1 @@
-module MaestranoRails
-end
+require 'maestrano/rails'
