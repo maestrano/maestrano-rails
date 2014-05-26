@@ -11,6 +11,20 @@ module Maestrano
       def copy_saml_controller
         template "saml_controller.rb", "app/controllers/maestrano/auth/saml_controller.rb"
       end
+      
+      def add_maestrano_routes
+        maestrano_routes = <<-CONTENT
+namespace :maestrano do
+  namespace :auth do
+    resources :saml, only:[] do
+      get 'init', on: :collection
+      post 'consume, on: :collection
+    end
+  end
+end
+CONTENT
+        route maestrano_routes
+      end
     end
   end
 end
