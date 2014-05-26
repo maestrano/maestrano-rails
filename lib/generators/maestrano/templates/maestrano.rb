@@ -9,14 +9,14 @@ Maestrano.configure do |config|
   # If set to 'test' then requests will be made to api-sandbox.maestrano.io
   # The api-sandbox allows you to easily test integration scenarios.
   # More details on http://api-sandbox.maestrano.io
-  config.environment = Rails.env.production ? 'production' : 'test'
+  config.environment = Rails.env.production? ? 'production' : 'test'
   
   # ==> API key
   # Your application API key which you can retrieve on http://maestrano.com
   # via your cloud partner dashboard.
   # For testing you can retrieve/generate an api_key from the API Sandbox directly 
   # on http://api-sandbox.maestrano.io
-  config.api_key = Rails.env.production ? 'prod_api_key' : 'sandbox_api_key'
+  config.api_key = Rails.env.production? ? 'prod_api_key' : 'sandbox_api_key'
   
   # ==> Single Sign-On activation
   # Enable/Disable single sign-on. When troubleshooting authentication issues
@@ -26,7 +26,7 @@ Maestrano.configure do |config|
   # ==> Application host
   # This is your application host (e.g: mysuperapp.com) which is ultimately
   # used to redirect users to the right SAML url during SSO handshake.
-  config.app_host = Rails.env.production ? 'https://my-production-app.com' : 'http://localhost::3000'
+  config.app_host = Rails.env.production? ? 'https://my-production-app.com' : 'http://localhost::3000'
   
   # ==> SSO Initialization endpoint
   # This is your application path to the SAML endpoint that allows users to

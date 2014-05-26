@@ -15,13 +15,13 @@ module Maestrano
       def add_maestrano_routes
         maestrano_routes = <<-CONTENT
 namespace :maestrano do
-  namespace :auth do
-    resources :saml, only:[] do
-      get 'init', on: :collection
-      post 'consume, on: :collection
+    namespace :auth do
+      resources :saml, only:[] do
+        get 'init', on: :collection
+        post 'consume', on: :collection
+      end
     end
   end
-end
 CONTENT
         route maestrano_routes
       end
