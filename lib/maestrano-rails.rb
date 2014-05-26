@@ -1,0 +1,2 @@
+module MaestranoRails
+end
