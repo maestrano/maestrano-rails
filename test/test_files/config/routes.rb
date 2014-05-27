@@ -1,12 +1,4 @@
 Dummy::Application.routes.draw do
-  namespace :maestrano do
-    namespace :auth do
-      resources :saml, only:[] do
-        get 'init', on: :collection
-        post 'consume', on: :collection
-      end
-    end
-  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

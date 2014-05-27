@@ -20,13 +20,14 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   end
   
   should "create the maestrano routes" do
+    
     run_generator
     match = /namespace\s+:maestrano\s+do\n\s*namespace\s+:auth\s+do\n\s*resources\s+:saml,\s+only:\[\]\s+do\n\s*get 'init',\son:\s:collection\n\s*post\s'consume',\s+on:\s+:collection(\n\s*end){3}/
     assert_file "config/routes.rb", match
   end
   
   def copy_routes
-    routes = File.expand_path("../../dummy/config/routes.rb", __FILE__)
+    routes = File.expand_path("../../test_files/config/routes.rb", __FILE__)
     destination = File.join(destination_root, "config")
 
     FileUtils.mkdir_p(destination)
