@@ -3,11 +3,33 @@ module Maestrano
     module OrmHelpers
       
       def model_contents
-        buffer = <<-CONTENT
-  # Enable Maestrano for this model
-  maestrano_#{model_type}_via :provider, :uid
+        
+        if model_type == 'user'
+          buffer = <<-CONTENT
+  # Enable Maestrano for this user
+  maestrano_user_via :provider, :uid do |user,maestrano|
+    user.name = maestrano.first_name
+    user.surname = maestrano.last_name
+    user.email = maestrano.email
+    #user.company = maestrano.company_name
+    #user.country_alpha2 = maestrano.country
+    #user.some_required_field = 'some-appropriate-default-value'
+  end
 
 CONTENT
+        else
+          buffer = <<-CONTENT
+  # Enable Maestrano for this group
+  maestrano_group_via :provider, :uid do |group, maestrano|
+    group.name = (maestrano.company_name || "Default Group name")
+    #group.country_alpha2 = maestrano.country
+    #group.free_trial_end_at = maestrano.free_trial_end_at
+    #group.some_required_field = 'some-appropriate-default-value'
+  end
+
+CONTENT
+        end
+        
         buffer += <<-CONTENT if needs_attr_accessible?
   # Setup protected attributes for your model
   attr_protected :provider, :uid
