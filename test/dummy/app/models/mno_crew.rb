@@ -3,6 +3,5 @@ class MnoCrew < ActiveRecord::Base
     group.name = maestrano.company_name || "Your Group"
   end
   
-  attr_accessible :name
-  attr_protected :provider, :uid
+  attr_accessible :name,:provider, :uid
 end
