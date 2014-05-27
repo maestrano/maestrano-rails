@@ -3,8 +3,8 @@ require 'test_helper'
 class MaestranoGroupViaTest < ActiveSupport::TestCase
   context "class methods" do
     should "have the right field definition" do
-      assert_equal "provider", MnoCrew.maestrano_fields[:provider]
-      assert_equal "uid", MnoCrew.maestrano_fields[:uid]
+      assert_equal "provider", MnoCrew.maestrano_options[:provider]
+      assert_equal "uid", MnoCrew.maestrano_options[:uid]
     end
   end
   

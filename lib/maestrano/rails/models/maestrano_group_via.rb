@@ -8,8 +8,8 @@ module Maestrano
 
       module ClassMethods
         def maestrano_group_via(provider_field,uid_field)
-          cattr_accessor :maestrano_fields
-          self.maestrano_fields = {
+          cattr_accessor :maestrano_options
+          self.maestrano_options = {
             provider: provider_field.to_s,
             uid: uid_field.to_s
           }
@@ -20,8 +20,8 @@ module Maestrano
       
       module LocalInstanceMethods
         def maestrano?
-          send(self.maestrano_fields[:provider]) == 'maestrano' &&
-          !send(self.maestrano_fields[:uid]).blank?
+          send(self.maestrano_options[:provider]) == 'maestrano' &&
+          !send(self.maestrano_options[:uid]).blank?
         end
       end
     end
