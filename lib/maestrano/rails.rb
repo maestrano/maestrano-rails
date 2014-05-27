@@ -1,6 +1,5 @@
 require 'maestrano'
-require 'maestrano/rails/models/maestrano_user_via'
-require 'maestrano/rails/models/maestrano_group_via'
+require 'maestrano/rails/models/maestrano_auth_resource'
 
 module Maestrano
   module Rails
