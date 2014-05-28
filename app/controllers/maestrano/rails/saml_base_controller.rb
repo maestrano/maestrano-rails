@@ -1,5 +1,6 @@
 class Maestrano::Rails::SamlBaseController < ApplicationController
   attr_reader :saml_response, :user_auth_hash, :group_auth_hash, :user_group_rel_hash
+  protect_from_forgery :except => [:consume]
   around_filter :saml_response_transaction, only: [:consume]
   
   # Initialize the SAML request and redirects the
@@ -31,11 +32,12 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       @saml_response = Maestrano::Saml::Response.new(params[:SAMLResponse])
       if @saml_response.validate!
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
+        puts @user_auth_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
         @user_group_rel_hash = {
-          user_uid: @saml_response.attributes['uid'],
-          group_uid: @saml_response.attributes['group_uid'],
-          role: @saml_response.attributes['group_role']
+          user_uid: @user_auth_hash[:uid],
+          group_uid: @group_auth_hash[:uid],
+          role: @user_auth_hash[:extra][:group][:role]
         }
       end
     end
