@@ -17,7 +17,7 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       yield
       Maestrano::SSO.set_session(session,@user_auth_hash)
     rescue Exception => e
-      Rails.env.development?
+      if Rails.env.development?
         raise
       else
         logger.error e
