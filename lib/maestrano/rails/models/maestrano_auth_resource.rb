@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 module Maestrano
   module Rails
     module MaestranoAuthResource
@@ -62,8 +64,20 @@ module Maestrano
             info = OpenStruct.new(auth_hash[:info])
             extra = OpenStruct.new(auth_hash[:extra])
             
-            # Create entity and call mapping block
+            # Create entity
             entity = self.new
+            
+            # Set password on entity in case this is required
+            # This is done before the mapping block in case
+            # password has been taken care of by the developer
+            password = Digest::SHA1.hexdigest("#{Time.now.utc}-#{rand(100)}")[0..20]
+            begin
+              entity.password = password if entity.respond_to?(:password)
+              entity.password_confirmation = password if entity.respond_to?(:password_confirmation)
+            rescue Exception => e
+            end
+            
+            # Call mapping block
             self.maestrano_options[:mapping].call(entity,info,extra)
             
             # Finally set provider and uid then save
