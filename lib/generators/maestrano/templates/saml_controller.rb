@@ -17,6 +17,8 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     ### --
     ### The class method 'find_or_create_for_maestrano' is provided
     ### by the maestrano-rails gem on the model you have maestrano-ized.
+    ### The method uses the mapping defined in the model 'maestrano_*_via' 
+    ### block to create the resource if it does not exist
     ### The 'user_auth_hash' and 'group_auth_hash' methods are provided
     ### by the controller.
     ### --
