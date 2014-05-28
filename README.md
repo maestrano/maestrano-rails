@@ -60,3 +60,32 @@ end
 ```
 
 This block is used to create a mapping between your user model fields and the attributes provided by Maestrano during the Single Sign-On handshake.
+
+### Group model
+Because Maestrano works with businesses it expects your service to be able to manage groups of users. A group represents 1) a billing entity 2) a collaboration group. During the first Single Sign-On handshake both a user and a group should be created. Additional users logging in via the same group should then be added to this existing group (see controller setup below)
+
+Assuming your group model is called 'Organization' you can run the following generator to prepare this model for single sign-on:
+
+```console
+rails generate maestrano:group Organization
+```
+
+This generator will create a migration adding a :provider and :uid field to your group model.
+
+Run the migration with:
+```console
+bundle exec rake db:migrate
+```
+
+This generator also adds a configuration block to your group model which looks like this:
+
+```ruby
+class Organization < ActiveRecord::Base
+  maestrano_group_via :provider, :uid do |group,maestrano|
+    group.name = maestrano.company_name || "Your Group"
+  end
+  
+  ...
+  
+end
+```
