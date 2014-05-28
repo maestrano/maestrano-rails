@@ -69,6 +69,16 @@ class SamlBaseControllerTest < ActionController::TestCase
       assert_equal expected_hash, @controller.group_auth_hash
     end
     
+    should "set the user_group_rel_hash in scope" do
+      post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
+      expected_hash = {
+        user_uid: @saml_attr['uid'],
+        group_uid: @saml_attr['group_uid'],
+        role: @saml_attr['group_role'],
+      }
+      assert_equal expected_hash, @controller.user_group_rel_hash
+    end
+    
     should "set the maestrano session" do
       post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
       assert_equal @saml_attr['uid'], @request.session[:mno_uid]

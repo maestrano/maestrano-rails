@@ -1,5 +1,5 @@
 class Maestrano::Rails::SamlBaseController < ApplicationController
-  attr_reader :saml_response, :user_auth_hash, :group_auth_hash
+  attr_reader :saml_response, :user_auth_hash, :group_auth_hash, :user_group_rel_hash
   around_filter :saml_response_transaction, only: [:consume]
   
   # Initialize the SAML request and redirects the
@@ -28,6 +28,11 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       if @saml_response.validate!
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
+        @user_group_rel_hash = {
+          user_uid: @saml_response.attributes['uid'],
+          group_uid: @saml_response.attributes['group_uid'],
+          role: @saml_response.attributes['group_role']
+        }
       end
     end
   end
