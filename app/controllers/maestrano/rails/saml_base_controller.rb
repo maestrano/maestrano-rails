@@ -17,8 +17,12 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       yield
       Maestrano::SSO.set_session(session,@user_auth_hash)
     rescue Exception => e
-      logger.error e
-      redirect_to "#{Maestrano::SSO.unauthorized_url}?err=internal"
+      Rails.env.development?
+        raise
+      else
+        logger.error e
+        redirect_to "#{Maestrano::SSO.unauthorized_url}?err=internal"
+      end
     end
   end
   
