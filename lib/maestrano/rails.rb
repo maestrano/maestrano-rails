@@ -1,5 +1,6 @@
 require 'maestrano'
 require 'maestrano/rails/models/maestrano_auth_resource'
+require 'maestrano/rails/controllers/maestrano_security'
 
 module Maestrano
   module Rails

@@ -16,6 +16,11 @@ module Maestrano
           self.maestrano_generic_configurator(provider_field,uid_field, &block)
           
           include Maestrano::Rails::MaestranoAuthResource::LocalInstanceUserMethods
+          
+          # Finally extend ApplicationController with MaestranoSecurity
+          # filters. It's useless to do that unless a maestrano_user is
+          # declared
+          ApplicationController.send :include, Maestrano::Rails::MaestranoSecurity
         end
         
         # Configure a group model with mapping to SSO fields

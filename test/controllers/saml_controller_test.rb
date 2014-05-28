@@ -4,14 +4,28 @@ class SamlBaseControllerTest < ActionController::TestCase
   tests Maestrano::Auth::SamlController
   
   context "init phase" do
-    should "create a saml request using params and session and redirect the user" do
-      req = mock('saml_request_instance')
-      req_params = {'controller' => 'maestrano/auth/saml', 'action' => 'init', 'a_param' => 'value'}
+    setup do
+      @req = mock('saml_request_instance')
+      @req_params = {'controller' => 'maestrano/auth/saml', 'action' => 'init', 'a_param' => 'value'}
+      @req.stubs(:redirect_url).returns("http://idpprovider.com?r=request")
       
-      req.stubs(:redirect_url).returns("http://idpprovider.com?r=request")
-      Maestrano::Saml::Request.stubs(:new).with(req_params,@request.session).returns(req)
+    end
+    
+    should "create a saml request using params and session and redirect the user" do
+      Maestrano::Saml::Request.stubs(:new).with(@req_params,@request.session).returns(@req)
       get :init, a_param: 'value'
-      assert_redirected_to req.redirect_url
+      assert_redirected_to @req.redirect_url
+    end
+    
+    should "create a saml request successfully if a maestrano session is already set" do
+      @request.session[:mno_uid] = 'usr-1'
+      @request.session[:mno_session] = 'fdsf544fd5sd4f'
+      @request.session[:mno_session_recheck] = Time.now.utc.iso8601
+      @request.session[:mno_group_uid] = 'cld-1'
+      
+      Maestrano::Saml::Request.stubs(:new).with(@req_params,@request.session).returns(@req)
+      get :init, a_param: 'value'
+      assert_redirected_to @req.redirect_url
     end
   end
   
@@ -56,6 +70,20 @@ class SamlBaseControllerTest < ActionController::TestCase
     end
     
     should "set the maestrano session" do
+      post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
+      assert_equal @saml_attr['uid'], @request.session[:mno_uid]
+      assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
+      assert_equal @saml_attr['mno_session_recheck'], @request.session[:mno_session_recheck]
+      assert_equal @saml_attr['group_uid'], @request.session[:mno_group_uid]
+      # group id as well!!!
+    end
+    
+    should "reset the maestrano session successfully if one already exists" do
+      @request.session[:mno_uid] = 'usr-1'
+      @request.session[:mno_session] = 'fdsf544fd5sd4f'
+      @request.session[:mno_session_recheck] = Time.now.utc.iso8601
+      @request.session[:mno_group_uid] = 'cld-1'
+      
       post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
       assert_equal @saml_attr['uid'], @request.session[:mno_uid]
       assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
