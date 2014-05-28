@@ -34,7 +34,7 @@ class SamlBaseControllerTest < ActionController::TestCase
       }
       @saml_resp = mock('saml_response')
       @saml_resp.stubs(:attributes).returns(@saml_attr)
-      @saml_resp.stubs(:validate!).raises(NoMethodError.new)
+      @saml_resp.stubs(:validate!).returns(true)
       Maestrano::Saml::Response.stubs(:new).returns(@saml_resp)
     end
     
@@ -60,21 +60,18 @@ class SamlBaseControllerTest < ActionController::TestCase
       assert_equal @saml_attr['uid'], @request.session[:mno_uid]
       assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
       assert_equal @saml_attr['mno_session_recheck'], @request.session[:mno_session_recheck]
+      # group id as well!!!
     end
     
     context "error" do
       setup do
-        
+        @saml_resp.stubs(:validate!).raises(NoMethodError.new("Bla"))
       end
     
-      should "description" do
-        
+      should "redirect to maestrano on any error" do
+        post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
+        assert_redirected_to "#{Maestrano::SSO.unauthorized_url}?err=internal"
       end
-    end
-    
-    
-    should "redirect" do
-      
     end
   end
   

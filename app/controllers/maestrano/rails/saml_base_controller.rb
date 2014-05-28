@@ -17,13 +17,15 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       yield
       set_maestrano_session
     rescue Exception => e
+      logger.error e
+      redirect_to "#{Maestrano::SSO.unauthorized_url}?err=internal"
     end
   end
   
   def process_saml_response
     if params[:SAMLResponse]
       @saml_response = Maestrano::Saml::Response.new(params[:SAMLResponse])
-      if @saml_response.is_valid?
+      if @saml_response.validate!
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
       end
