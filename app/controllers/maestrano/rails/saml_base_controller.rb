@@ -1,4 +1,5 @@
 class Maestrano::Rails::SamlBaseController < ApplicationController
+  attr_reader :saml_response, :user_auth_hash, :group_auth_hash
   before_filter :process_saml_response, only: [:consume]
   
   # Initialize the SAML request and redirects the
@@ -18,17 +19,5 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
       end
     end
-  end
-  
-  def saml_response
-    @saml_response
-  end
-  
-  def user_auth_hash
-    @user_auth_hash
-  end
-  
-  def group_auth_hash
-    @group_auth_hash
   end
 end
