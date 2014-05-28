@@ -1,4 +1,4 @@
-class Maestrano::Auth::SamlController < ApplicationController
+class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
   
   # == GET '/maestrano/auth/saml/init'
   # == Action automatically handled by parent controller
