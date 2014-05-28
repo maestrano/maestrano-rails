@@ -15,7 +15,7 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
     begin
       process_saml_response
       yield
-      set_maestrano_session
+      Maestrano::SSO.set_session(session,@user_auth_hash)
     rescue Exception => e
       logger.error e
       redirect_to "#{Maestrano::SSO.unauthorized_url}?err=internal"
@@ -29,14 +29,6 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
       end
-    end
-  end
-  
-  def set_maestrano_session
-    if @user_auth_hash && session
-      session[:mno_uid] = @saml_response.attributes['uid']
-      session[:mno_session] = @saml_response.attributes['mno_session']
-      session[:mno_session_recheck] = @saml_response.attributes['mno_session_recheck']
     end
   end
 end

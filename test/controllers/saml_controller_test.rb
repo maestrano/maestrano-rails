@@ -60,6 +60,7 @@ class SamlBaseControllerTest < ActionController::TestCase
       assert_equal @saml_attr['uid'], @request.session[:mno_uid]
       assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
       assert_equal @saml_attr['mno_session_recheck'], @request.session[:mno_session_recheck]
+      assert_equal @saml_attr['group_uid'], @request.session[:mno_group_uid]
       # group id as well!!!
     end
     
