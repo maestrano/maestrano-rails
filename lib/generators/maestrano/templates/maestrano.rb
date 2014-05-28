@@ -26,7 +26,7 @@ Maestrano.configure do |config|
   # ==> Application host
   # This is your application host (e.g: mysuperapp.com) which is ultimately
   # used to redirect users to the right SAML url during SSO handshake.
-  config.app_host = Rails.env.production? ? 'https://my-production-app.com' : 'http://localhost::3000'
+  config.app_host = Rails.env.production? ? 'https://my-production-app.com' : 'http://localhost:3000'
   
   # ==> SSO Initialization endpoint
   # This is your application path to the SAML endpoint that allows users to
