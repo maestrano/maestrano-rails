@@ -5,12 +5,19 @@ class GenericControllerTest < ActionController::TestCase
   
   context "with a maestrano session" do
     setup do
+      @original_sso_value = Maestrano.param(:sso_enabled)
+      Maestrano.configure { |config| config.sso_enabled = true }
+      
       @request.session[:mno_uid] = 'usr-1'
       @request.session[:mno_session] = 'fdsf544fd5sd4f'
       @request.session[:mno_session_recheck] = Time.now.utc.iso8601
       @request.session[:mno_group_uid] = 'cld-1'
     end
-  
+    
+    teardown do
+      Maestrano.configure { |config| config.sso_enabled = @original_sso_value }
+    end
+    
     should "be successful if the maestrano session is still valid" do
       sso_session = mock('maestrano_sso_session')
       sso_session.stubs(:valid?).returns(true)
@@ -25,6 +32,15 @@ class GenericControllerTest < ActionController::TestCase
       Maestrano::SSO::Session.stubs(:new).returns(sso_session)
       get :home
       assert_redirected_to Maestrano::SSO.init_url
+    end
+    
+    should "not redirect to SSO init if sso is disabled" do
+      Maestrano.configure { |config| config.sso_enabled = false }
+      sso_session = mock('maestrano_sso_session')
+      sso_session.stubs(:valid?).returns(false)
+      Maestrano::SSO::Session.stubs(:new).returns(sso_session)
+      get :home
+      assert_response :success
     end
   end
   

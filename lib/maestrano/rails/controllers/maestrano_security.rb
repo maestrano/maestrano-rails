@@ -17,9 +17,11 @@ module Maestrano
         # its validity. If not valid anymore the filter
         # triggers a Maestrano SSO handshake
         def verify_maestrano_session
-          unless controller_name == 'saml' && ['init','consume'].include?(action_name)
-            if session && session[:mno_uid] && !Maestrano::SSO::Session.new(session).valid?
-              redirect_to Maestrano::SSO.init_url
+          if Maestrano.param(:sso_enabled)
+            unless controller_name == 'saml' && ['init','consume'].include?(action_name)
+              if session && session[:mno_uid] && !Maestrano::SSO::Session.new(session).valid?
+                redirect_to Maestrano::SSO.init_url
+              end
             end
           end
           true
