@@ -19,6 +19,7 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     ### by the maestrano-rails gem on the model you have maestrano-ized.
     ### The 'user_auth_hash' and 'group_auth_hash' methods are provided
     ### by the controller.
+    ### --
     # user = User.find_or_create_for_maestrano(user_auth_hash)
     # organization = Organization.find_or_create_for_maestrano(group_auth_hash)
     #
@@ -30,6 +31,7 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     ### 'Member', 'Power User', 'Admin', 'Super Admin'
     ### The 'member_of?' and 'add_member' methods are not provided by 
     ### maestrano and are left to you to implement on your models
+    ### --
     # unless user.member_of?(organization)
     #   organization.add_member(user,role: user_group_rel_hash[:role])
     # end
@@ -39,6 +41,7 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     ### --
     ### The 'sign_in' method is not provided by maestrano but should already
     ### be there if you are using an authentication framework like Devise
+    ### --
     # sign_in(user)
     # redirect_to root_path
     
