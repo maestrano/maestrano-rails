@@ -4,7 +4,14 @@
 
 Maestrano Cloud Integration is currently in closed beta. Want to know more? Send us an email to <contact@maestrano.com>.
 
-## Getting started
+## Getting Setup
+Before integrating with us you will need an API Key. Maestrano Cloud Integration being still in closed beta you will need to contact us beforehand to gain production access.
+
+For testing purpose we provide an API Sandbox where you can freely obtain an API Token. The sandbox is great to test single sign-on and API integration (e.g: billing API).
+
+To get started just go to: http://api-sandbox.maestrano.io
+
+## Getting Started
 
 maestrano-rails works with Rails 3.2 onwards. You can add it to your Gemfile with:
 
@@ -12,7 +19,7 @@ maestrano-rails works with Rails 3.2 onwards. You can add it to your Gemfile wit
 gem 'maestrano-rails'
 ```
 
-Run bundle to install the gem as well as the maestrano [ruby bindings](https://github.com/maestrano/maestrano-ruby) (dependency)
+Run bundle to install the gem as well as the [maestrano ruby bindings](https://github.com/maestrano/maestrano-ruby) (dependency)
 
 ```console
 bundle
