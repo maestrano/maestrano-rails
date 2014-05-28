@@ -1,4 +1,6 @@
 Dummy::Application.routes.draw do
+  get "pages/home"
+
   namespace :maestrano do
     namespace :auth do
       resources :saml, only:[] do
@@ -7,6 +9,8 @@ Dummy::Application.routes.draw do
       end
     end
   end
+  
+  root to: 'pages#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
