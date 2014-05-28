@@ -144,3 +144,14 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
   end
 end
 ```
+
+## Support
+This README is still in the process of being written and improved. As such it might not cover some of the questions you might have.
+
+So if you have any question or need help integrating with us just let us know at support@maestrano.com
+
+## License
+
+MIT License. Copyright 2014 Maestrano Pty Ltd. https://maestrano.com
+
+You are not granted rights or licenses to the trademarks of Maestrano.
