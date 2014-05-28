@@ -1,4 +1,4 @@
-![Maestrano Logo](https://raw.github.com/maestrano/maestrano-rails/master/maestrano.png)
+<img align="center" src="https://raw.github.com/maestrano/maestrano-rails/master/maestrano.png" alt="Maestrano Logo">
 
 Maestrano Cloud Integration is currently in closed beta. Want to know more? Send us an email to <contact@maestrano.com>.
 
@@ -23,7 +23,7 @@ rails generate maestrano:install
 ```
 
 The generator will install an initializer which describes ALL Maestrano's configuration options. You will need to take a look at it as this is where you set your API key.
-The generator also generates a SamlController for Single Sign-On that you will need to customize (see below) as well as the required routes.
+The generator also generates a SamlController for single sign-on that you will need to customize (see below) as well as the required routes.
 
 When you are done, you can start maestrano-izing your user and group model using the generators.
 
@@ -59,10 +59,10 @@ class User < ActiveRecord::Base
 end
 ```
 
-This block is used to create a mapping between your user model fields and the attributes provided by Maestrano during the Single Sign-On handshake.
+This block is used to create a mapping between your user model fields and the attributes provided by Maestrano during the single sign-on handshake.
 
 ### Group model
-Because Maestrano works with businesses it expects your service to be able to manage groups of users. A group represents 1) a billing entity 2) a collaboration group. During the first Single Sign-On handshake both a user and a group should be created. Additional users logging in via the same group should then be added to this existing group (see controller setup below)
+Because Maestrano works with businesses it expects your service to be able to manage groups of users. A group represents 1) a billing entity 2) a collaboration group. During the first single sign-on handshake both a user and a group should be created. Additional users logging in via the same group should then be added to this existing group (see controller setup below)
 
 Assuming your group model is called 'Organization' you can run the following generator to prepare this model for single sign-on:
 
@@ -91,7 +91,7 @@ end
 ```
 
 ### Controller setup
-The last step of integrating single sign-on with Maestrano is to customize the consume action of the SamlController. This action represents the last step of Single Sign-On handshake and should handle user finding/creation, group finding/creation, user-group relationship and finally user sign in.
+The last step of integrating single sign-on with Maestrano is to customize the consume action of the SamlController. This action represents the last step of single sign-on handshake and should handle user finding/creation, group finding/creation, user-group relationship and finally user sign in.
 
 The controller is located here: app/controllers/maestrano/auth/saml_controller.rb
 
@@ -127,9 +127,9 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     # The 'member_of?' and 'add_member' methods are not provided by 
     # maestrano and are left to you to implement on your models
     # --
-     unless user.member_of?(organization)
-       organization.add_member(user,role: user_group_rel_hash[:role])
-     end
+    unless user.member_of?(organization)
+      organization.add_member(user,role: user_group_rel_hash[:role])
+    end
     
     
     # Sign the user in and redirect to application root
@@ -137,8 +137,8 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     # The 'sign_in' method is not provided by maestrano but should already
     # be there if you are using an authentication framework like Devise
     # --
-     sign_in(user)
-     redirect_to root_path
+    sign_in(user)
+    redirect_to root_path
   end
 end
 ```
