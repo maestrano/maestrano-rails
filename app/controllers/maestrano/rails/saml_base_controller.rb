@@ -1,6 +1,6 @@
 class Maestrano::Rails::SamlBaseController < ApplicationController
   attr_reader :saml_response, :user_auth_hash, :group_auth_hash
-  before_filter :process_saml_response, only: [:consume]
+  around_filter :saml_response_transaction, only: [:consume]
   
   # Initialize the SAML request and redirects the
   # user to Maestrano
@@ -11,6 +11,15 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
   #===================================
   # Helper methods
   #===================================
+  def saml_response_transaction
+    begin
+      process_saml_response
+      yield
+      set_maestrano_session
+    rescue Exception => e
+    end
+  end
+  
   def process_saml_response
     if params[:SAMLResponse]
       @saml_response = Maestrano::Saml::Response.new(params[:SAMLResponse])
@@ -18,6 +27,14 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
       end
+    end
+  end
+  
+  def set_maestrano_session
+    if @user_auth_hash && session
+      session[:mno_uid] = @saml_response.attributes['uid']
+      session[:mno_session] = @saml_response.attributes['mno_session']
+      session[:mno_session_recheck] = @saml_response.attributes['mno_session_recheck']
     end
   end
 end

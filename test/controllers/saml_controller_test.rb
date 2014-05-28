@@ -34,7 +34,7 @@ class SamlBaseControllerTest < ActionController::TestCase
       }
       @saml_resp = mock('saml_response')
       @saml_resp.stubs(:attributes).returns(@saml_attr)
-      @saml_resp.stubs(:is_valid?).returns(true)
+      @saml_resp.stubs(:validate!).raises(NoMethodError.new)
       Maestrano::Saml::Response.stubs(:new).returns(@saml_resp)
     end
     
@@ -53,6 +53,28 @@ class SamlBaseControllerTest < ActionController::TestCase
       post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
       expected_hash = Maestrano::SSO::BaseGroup.new(@saml_resp).to_hash
       assert_equal expected_hash, @controller.group_auth_hash
+    end
+    
+    should "set the maestrano session" do
+      post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
+      assert_equal @saml_attr['uid'], @request.session[:mno_uid]
+      assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
+      assert_equal @saml_attr['mno_session_recheck'], @request.session[:mno_session_recheck]
+    end
+    
+    context "error" do
+      setup do
+        
+      end
+    
+      should "description" do
+        
+      end
+    end
+    
+    
+    should "redirect" do
+      
     end
   end
   
