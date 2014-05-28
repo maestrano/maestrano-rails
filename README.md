@@ -89,3 +89,56 @@ class Organization < ActiveRecord::Base
   
 end
 ```
+
+### Controller setup
+The last step of integrating single sign-on with Maestrano is to customize the consume action of the SamlController. This action represents the last step of Single Sign-On handshake and should handle user finding/creation, group finding/creation, user-group relationship and finally user sign in.
+
+The controller is located here: app/controllers/maestrano/auth/saml_controller.rb
+
+The sample belows shows one possible way of writing this controller action:
+
+```ruby
+class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
+  
+  #== POST '/maestrano/auth/saml/consume'
+  # -
+  # Assuming you have enabled maestrano on a user model
+  # called 'User' and a group model called 'Organization'
+  # the action could be written the following way
+  def consume
+    # 1)Find or create the user and the group
+    # --
+    # The class method 'find_or_create_for_maestrano' is provided
+    # by the maestrano-rails gem on the model you have maestrano-ized.
+    # The method uses the mapping defined in the model 'maestrano_*_via' 
+    # block to create the resource if it does not exist
+    # The 'user_auth_hash' and 'group_auth_hash' methods are provided
+    # by the controller.
+    # --
+    user = User.find_or_create_for_maestrano(user_auth_hash)
+    organization = Organization.find_or_create_for_maestrano(group_auth_hash)
+    
+    
+    # 2) Add the user to the group if not already a member
+    # --
+    # The 'user_group_rel_hash' method is provided by the controller.
+    # The role attribute provided by maestrano is one of the following: 
+    # 'Member', 'Power User', 'Admin', 'Super Admin'
+    # The 'member_of?' and 'add_member' methods are not provided by 
+    # maestrano and are left to you to implement on your models
+    # --
+     unless user.member_of?(organization)
+       organization.add_member(user,role: user_group_rel_hash[:role])
+     end
+    
+    
+    # Sign the user in and redirect to application root
+    # --
+    # The 'sign_in' method is not provided by maestrano but should already
+    # be there if you are using an authentication framework like Devise
+    # --
+     sign_in(user)
+     redirect_to root_path
+  end
+end
+```
