@@ -152,6 +152,11 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
 end
 ```
 
+## API
+The maestrano-rails gem also provides bindings to its REST API allowing you to access, create, update or delete various entities under your account (e.g: billing).
+
+Your can read the API documentation directly on the [maestrano gem project page](https://github.com/maestrano/maestrano-ruby#api).
+
 ## Support
 This README is still in the process of being written and improved. As such it might not cover some of the questions you might have.
 
