@@ -4,6 +4,21 @@
 
 Maestrano Cloud Integration is currently in closed beta. Want to know more? Send us an email to <contact@maestrano.com>.
 
+
+- - -
+
+1.  [Getting Setup](#getting-setup)
+2. [Getting Started](#getting-started)
+  * [User Model](#user-model)
+  * [Group Model](#group-model)
+  * [Controller Setup](#controller-setup)
+3. [API](https://github.com/maestrano/maestrano-ruby#api)
+  * [Bill](https://github.com/maestrano/maestrano-ruby#bill)
+  * [Recurring Bill](https://github.com/maestrano/maestrano-ruby#recurring-bill)
+
+- - -
+
+
 ## Getting Setup
 Before integrating with us you will need an API Key. Maestrano Cloud Integration being still in closed beta you will need to contact us beforehand to gain production access.
 
