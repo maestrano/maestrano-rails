@@ -33,11 +33,7 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       if @saml_response.validate!
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
-        @user_group_rel_hash = {
-          user_uid: @user_auth_hash[:uid],
-          group_uid: @group_auth_hash[:uid],
-          role: @user_auth_hash[:extra][:group][:role]
-        }
+        @user_group_rel_hash = Maestrano::SSO::BaseMembership.new(@saml_response).to_hash
       end
     end
   end

@@ -72,6 +72,7 @@ class SamlBaseControllerTest < ActionController::TestCase
     should "set the user_group_rel_hash in scope" do
       post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
       expected_hash = {
+        provider: 'maestrano',
         user_uid: @saml_attr['uid'],
         group_uid: @saml_attr['group_uid'],
         role: @saml_attr['group_role'],
