@@ -19,7 +19,7 @@ module Maestrano
         def verify_maestrano_session
           if Maestrano.param(:sso_enabled)
             unless controller_name == 'saml' && ['init','consume'].include?(action_name)
-              if session && session[:mno_uid] && !Maestrano::SSO::Session.new(session).valid?
+              if session && !Maestrano::SSO::Session.new(session).valid?
                 redirect_to Maestrano::SSO.init_url
               end
             end
