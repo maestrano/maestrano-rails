@@ -6,7 +6,6 @@ class Maestrano::AccountHook::GroupUsersController < Maestrano::Rails::WebHookCo
     # Set the right uid based on Maestrano.param('user_creation_mode')
     user_uid = Maestrano.mask_user(params[:id],params[:group_id]) 
     group_uid = params[:group_id]
-    puts "tamere"
     render text: "Yay!"
     
     # Perform association deletion steps here
