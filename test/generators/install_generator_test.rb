@@ -22,7 +22,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   should "create the maestrano routes" do
     
     run_generator
-    match = /namespace\s+:maestrano\s+do\n\s*namespace\s+:auth\s+do\n\s*resources\s+:saml,\s+only:\[\]\s+do\n\s*get 'init',\son:\s:collection\n\s*post\s'consume',\s+on:\s+:collection(\n\s*end){3}/
+    match = /maestrano_routes/
     assert_file "config/routes.rb", match
   end
   

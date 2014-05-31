@@ -1,14 +1,7 @@
 Dummy::Application.routes.draw do
   get "pages/home"
-
-  namespace :maestrano do
-    namespace :auth do
-      resources :saml, only:[] do
-        get 'init', on: :collection
-        post 'consume', on: :collection
-      end
-    end
-  end
+  
+  maestrano_routes
   
   root to: 'pages#home'
   # The priority is based upon order of creation:
