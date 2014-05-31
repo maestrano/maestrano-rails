@@ -8,6 +8,12 @@ module ActionDispatch::Routing
             post 'consume', on: :collection
           end
         end
+        
+        namespace :account_hook do
+          resources :groups, only: [:destroy] do
+            resources :users, only: [:destroy], controller: 'group_users'
+          end
+        end
       end
     end
   end
