@@ -8,10 +8,12 @@ class GenericControllerTest < ActionController::TestCase
       @original_sso_value = Maestrano.param(:sso_enabled)
       Maestrano.configure { |config| config.sso_enabled = true }
       
-      @request.session[:mno_uid] = 'usr-1'
-      @request.session[:mno_session] = 'fdsf544fd5sd4f'
-      @request.session[:mno_session_recheck] = Time.now.utc.iso8601
-      @request.session[:mno_group_uid] = 'cld-1'
+      @request.session[:maestrano] = Base64.encode64({
+        uid: 'usr-1',
+        session: 'fdsf544fd5sd4f',
+        session_recheck: Time.now.utc.iso8601,
+        group_uid: 'cld-1'
+      }.to_json)
     end
     
     teardown do
