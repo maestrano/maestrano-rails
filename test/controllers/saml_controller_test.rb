@@ -82,25 +82,30 @@ class SamlBaseControllerTest < ActionController::TestCase
     
     should "set the maestrano session" do
       post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
-      assert_equal @saml_attr['uid'], @request.session[:mno_uid]
-      assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
-      assert_equal @saml_attr['mno_session_recheck'], @request.session[:mno_session_recheck]
-      assert_equal @saml_attr['group_uid'], @request.session[:mno_group_uid]
-      # group id as well!!!
+      decrypted_session = JSON.parse(Base64.decode64(@request.session[:maestrano]))
+      
+      assert_equal @saml_attr['uid'], decrypted_session['uid']
+      assert_equal @saml_attr['mno_session'], decrypted_session['session']
+      assert_equal @saml_attr['mno_session_recheck'], decrypted_session['session_recheck']
+      assert_equal @saml_attr['group_uid'], decrypted_session['group_uid']
     end
     
     should "reset the maestrano session successfully if one already exists" do
-      @request.session[:mno_uid] = 'usr-1'
-      @request.session[:mno_session] = 'fdsf544fd5sd4f'
-      @request.session[:mno_session_recheck] = Time.now.utc.iso8601
-      @request.session[:mno_group_uid] = 'cld-1'
+      params = {
+        uid: 'usr-1',
+        session: 'fdsf544fd5sd4f',
+        session_recheck: Time.now.utc.iso8601,
+        group_uid: 'cld-1'
+      }
+      @request.session[:maestrano] = Base64.encode64(params.to_json)
       
       post :consume, SAMLResponse: "g45ad5v40xc4b3fd478"
-      assert_equal @saml_attr['uid'], @request.session[:mno_uid]
-      assert_equal @saml_attr['mno_session'], @request.session[:mno_session]
-      assert_equal @saml_attr['mno_session_recheck'], @request.session[:mno_session_recheck]
-      assert_equal @saml_attr['group_uid'], @request.session[:mno_group_uid]
-      # group id as well!!!
+      decrypted_session = JSON.parse(Base64.decode64(@request.session[:maestrano]))
+      
+      assert_equal @saml_attr['uid'], decrypted_session['uid']
+      assert_equal @saml_attr['mno_session'], decrypted_session['session']
+      assert_equal @saml_attr['mno_session_recheck'], decrypted_session['session_recheck']
+      assert_equal @saml_attr['group_uid'], decrypted_session['group_uid']
     end
     
     context "error" do
