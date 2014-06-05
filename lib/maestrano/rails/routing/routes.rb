@@ -9,7 +9,7 @@ module ActionDispatch::Routing
           end
         end
         
-        namespace :account_hook do
+        namespace :account do
           resources :groups, only: [:destroy] do
             resources :users, only: [:destroy], controller: 'group_users'
           end

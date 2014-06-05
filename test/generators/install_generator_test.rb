@@ -19,14 +19,14 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     assert_file "app/controllers/maestrano/auth/saml_controller.rb"
   end
   
-  should "create the maestrano/account_hook/groups_controller" do
+  should "create the maestrano/account/groups_controller" do
     run_generator
-    assert_file "app/controllers/maestrano/account_hook/groups_controller.rb"
+    assert_file "app/controllers/maestrano/account/groups_controller.rb"
   end
   
-  should "create the maestrano/account_hook/group_users_controller" do
+  should "create the maestrano/account/group_users_controller" do
     run_generator
-    assert_file "app/controllers/maestrano/account_hook/group_users_controller.rb"
+    assert_file "app/controllers/maestrano/account/group_users_controller.rb"
   end
   
   should "create the maestrano routes" do

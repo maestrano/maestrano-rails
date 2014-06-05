@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
-  tests Maestrano::AccountHook::GroupsController
+  tests Maestrano::Account::GroupsController
   
   context "unauthenticated" do
     should "deny access" do

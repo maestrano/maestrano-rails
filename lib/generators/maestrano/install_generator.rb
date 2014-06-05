@@ -12,12 +12,12 @@ module Maestrano
         template "saml_controller.rb", "app/controllers/maestrano/auth/saml_controller.rb"
       end
       
-      def copy_account_hook_groups_controller
-        template "groups_controller.rb", "app/controllers/maestrano/account_hook/groups_controller.rb"
+      def copy_account_groups_controller
+        template "groups_controller.rb", "app/controllers/maestrano/account/groups_controller.rb"
       end
       
-      def copy_account_hook_group_users_controller
-        template "group_users_controller.rb", "app/controllers/maestrano/account_hook/group_users_controller.rb"
+      def copy_account_group_users_controller
+        template "group_users_controller.rb", "app/controllers/maestrano/account/group_users_controller.rb"
       end
       
       def add_maestrano_routes
