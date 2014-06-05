@@ -11,7 +11,7 @@ class Maestrano::AccountHook::GroupsController < Maestrano::Rails::WebHookContro
     # If you need to perform a final checkout
     # then you can call Maestrano::Account::Bill.create({.. final checkout details ..})
     # --
-    # If Maestrano.param('user_creation_mode') is set to virtual
+    # If Maestrano.param('sso.creation_mode') is set to virtual
     # then you might want to delete/cancel/block all users under
     # that group
     # --
@@ -25,7 +25,7 @@ class Maestrano::AccountHook::GroupsController < Maestrano::Rails::WebHookContro
     #   description: "Final Payout"
     # })
     # 
-    # if Maestrano.param('user_creation_mode') == 'virtual'
+    # if Maestrano.param('sso.creation_mode') == 'virtual'
     #   organization.members.where(provider:'maestrano').each do |user|
     #   user.destroy
     # end
