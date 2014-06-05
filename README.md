@@ -49,7 +49,8 @@ After you install Maestrano and add it to your Gemfile, you need to run the gene
 rails generate maestrano:install
 ```
 
-The generator will install an initializer which describes ALL Maestrano's configuration options. You will need to take a look at it as this is where you set your API key.
+The generator will install an initializer which describes ALL Maestrano's configuration options. You will need to take a look at it as this is where you set your API key. This configuration will also be used to automatically generate a '/maestrano/metadata' endpoint in your application that Maestrano will fetch automatically at regular intervals (or by hitting 'refresh metadata' in your cloud partner dashboard on maestrano.com).
+
 The generator also generates a SamlController for single sign-on that you will need to customize (see below) as well as the required routes.
 
 When you are done, you can start maestrano-izing your user and group model using the generators.
