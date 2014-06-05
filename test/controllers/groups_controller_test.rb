@@ -12,7 +12,7 @@ class GroupsControllerTest < ActionController::TestCase
   
   context "authenticated" do
     setup do
-      @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64.encode64("#{Maestrano.param('app_id')}:#{Maestrano.param('api_key')}")
+      @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64.encode64("#{Maestrano.param('api.id')}:#{Maestrano.param('api.key')}")
     end
     
     should "be successful" do
