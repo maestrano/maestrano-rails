@@ -1,4 +1,4 @@
-class Maestrano::AccountHook::GroupUsersController < Maestrano::Rails::WebHookController
+class Maestrano::Account::GroupUsersController < Maestrano::Rails::WebHookController
 
   # DELETE /maestrano/account/groups/cld-1/users/usr-1
   # Remove a user from a group

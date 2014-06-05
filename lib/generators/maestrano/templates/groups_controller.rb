@@ -1,4 +1,4 @@
-class Maestrano::AccountHook::GroupsController < Maestrano::Rails::WebHookController
+class Maestrano::Account::GroupsController < Maestrano::Rails::WebHookController
   
   # DELETE /maestrano/account/groups/cld-1
   # Delete an entire group
