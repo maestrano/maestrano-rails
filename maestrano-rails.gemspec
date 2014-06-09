@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.3"
-  s.add_dependency "maestrano", "~> 0.6"
+  s.add_dependency "maestrano", "~> 0.7"
   
   s.add_development_dependency('test-unit', '~> 2')
   s.add_development_dependency('mocha', '~> 0.13')
