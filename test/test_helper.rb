@@ -10,7 +10,7 @@ else
 end
 require "rails/test_help"
 require "shoulda"
-require "mocha"
+require "mocha/setup"
 require "database_cleaner"
 
 Rails.backtrace_cleaner.remove_silencers!
