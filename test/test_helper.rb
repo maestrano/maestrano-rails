@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] = "test"
 TEST_ORM = (ENV["TEST_ORM"] || :active_record).to_sym
 
 if TEST_ORM == :mongoid
+  require 'mongoid'
   require File.expand_path("../dummy_mongoid/config/environment.rb",  __FILE__)
 else
   require File.expand_path("../dummy_activerecord/config/environment.rb",  __FILE__)

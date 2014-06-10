@@ -1,5 +1,5 @@
 class MnoCrew
-  include Mongoid::Document
+  include ::Mongoid::Document
   field :name,      type: String, default: ""
   field :provider,  type: String, default: ""
   field :uid,       type: String, default: ""

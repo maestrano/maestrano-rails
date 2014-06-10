@@ -1,5 +1,5 @@
 class MnoMonster
-  include Mongoid::Document
+  include ::Mongoid::Document
   field :email,      type: String, default: ""
   field :first_name, type: String, default: ""
   field :last_name,  type: String, default: ""

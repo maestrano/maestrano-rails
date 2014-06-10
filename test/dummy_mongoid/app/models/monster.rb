@@ -1,3 +1,3 @@
 class Monster
-  include Mongoid::Document
+  include ::Mongoid::Document
 end
