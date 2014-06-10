@@ -1,2 +1,3 @@
-class Monster < ActiveRecord::Base
+class Monster
+  include Mongoid::Document
 end
