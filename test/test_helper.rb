@@ -10,6 +10,7 @@ end
 require "rails/test_help"
 require "shoulda"
 require "mocha"
+require "database_cleaner"
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -19,6 +20,13 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 # Load fixtures from the engine
 if ActiveSupport::TestCase.method_defined?(:fixture_path=)
   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+end
+
+# Configure database cleaning
+DatabaseCleaner.strategy = (TEST_ORM == :mongoid ? :truncation : :transaction)
+class ActiveSupport::TestCase
+  setup { DatabaseCleaner.start }
+  teardown { DatabaseCleaner.clean }
 end
 
 # For generators
