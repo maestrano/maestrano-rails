@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('mocha', '~> 0.13')
   s.add_development_dependency('shoulda', '~> 2.11')
 
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency("sqlite3")
+  s.add_development_dependency("mongoid")
 end

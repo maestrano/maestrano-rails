@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maestrano-rails (0.6.0)
+    maestrano-rails (0.7.0)
       maestrano (~> 0.7)
       rails (~> 3.2.3)
 
@@ -61,9 +61,16 @@ GEM
     mini_portile (0.6.0)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
+    mongoid (3.1.6)
+      activemodel (~> 3.2)
+      moped (~> 1.4)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.29)
+    moped (1.5.2)
     multi_json (1.10.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    origin (1.1.0)
     polyglot (0.3.5)
     rack (1.4.5)
     rack-cache (1.2)
@@ -117,6 +124,7 @@ DEPENDENCIES
   jquery-rails
   maestrano-rails!
   mocha (~> 0.13)
+  mongoid
   shoulda (~> 2.11)
   sqlite3
   test-unit (~> 2)

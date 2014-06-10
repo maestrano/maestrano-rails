@@ -107,4 +107,6 @@ module Maestrano
   end
 end
 
-ActiveRecord::Base.send :include, Maestrano::Rails::MaestranoAuthResource
+if defined?(ActiveRecord)
+  ActiveRecord::Base.send :include, Maestrano::Rails::MaestranoAuthResource
+end
