@@ -25,6 +25,9 @@ end
 # Configure database cleaning
 DatabaseCleaner.strategy = (TEST_ORM == :mongoid ? :truncation : :transaction)
 class ActiveSupport::TestCase
+  # Stop ActiveRecord from wrapping tests in transactions
+  self.use_transactional_fixtures = false
+    
   setup { DatabaseCleaner.start }
   teardown { DatabaseCleaner.clean }
 end
