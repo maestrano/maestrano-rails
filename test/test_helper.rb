@@ -2,10 +2,16 @@
 ENV["RAILS_ENV"] = "test"
 TEST_ORM = (ENV["TEST_ORM"] || :active_record).to_sym
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+if TEST_ORM == :mongoid
+  require 'mongoid'
+  require File.expand_path("../dummy_mongoid/config/environment.rb",  __FILE__)
+else
+  require File.expand_path("../dummy_activerecord/config/environment.rb",  __FILE__)
+end
 require "rails/test_help"
 require "shoulda"
-require "mocha"
+require "mocha/setup"
+require "database_cleaner"
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -15,6 +21,18 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 # Load fixtures from the engine
 if ActiveSupport::TestCase.method_defined?(:fixture_path=)
   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+end
+
+# Configure database cleaning
+DatabaseCleaner.strategy = (TEST_ORM == :mongoid ? :truncation : :transaction)
+class ActiveSupport::TestCase
+  # Stop ActiveRecord from wrapping tests in transactions
+  if TEST_ORM == :active_record
+    self.use_transactional_fixtures = false
+  end
+    
+  setup { DatabaseCleaner.start }
+  teardown { DatabaseCleaner.clean }
 end
 
 # For generators

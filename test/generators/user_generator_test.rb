@@ -19,7 +19,7 @@ class UserGeneratorTest < Rails::Generators::TestCase
   
   # Copy model like: 'monster' or 'admin/monster'
   def copy_model(relative_model_path)
-    model_path = File.expand_path("../../dummy/app/models/#{relative_model_path}.rb", __FILE__)
+    model_path = File.expand_path("../../dummy_activerecord/app/models/#{relative_model_path}.rb", __FILE__)
     if (path_ary = relative_model_path.split('/')) && path_ary.size > 1
       destination = File.join(destination_root, "app", "models",*path_ary[0..-2])
     else

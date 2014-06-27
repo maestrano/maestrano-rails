@@ -22,6 +22,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency('test-unit', '~> 2')
   s.add_development_dependency('mocha', '~> 0.13')
   s.add_development_dependency('shoulda', '~> 2.11')
-
-  s.add_development_dependency "sqlite3"
+  
+  s.add_development_dependency("database_cleaner")
+  s.add_development_dependency("sqlite3")
+  s.add_development_dependency("mongoid", '~> 2.4')
+  s.add_development_dependency("bson_ext")
 end
