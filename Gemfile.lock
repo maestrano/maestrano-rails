@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maestrano-rails (0.9.0)
+    maestrano-rails (0.9.1)
       maestrano (~> 0.8.1)
       rails (~> 3.2.3)
 
