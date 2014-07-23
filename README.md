@@ -213,7 +213,7 @@ class Maestrano::Account::GroupsController < Maestrano::Rails::WebHookController
     end
     
     organization.destroy
-    render json: {success: true}, status: :success
+    render json: {success: true}
   end
 end
 ```
@@ -250,6 +250,8 @@ class Maestrano::Account::GroupUsersController < Maestrano::Rails::WebHookContro
       organization.remove_user(user)
       user.block_access! if user.reload.organizations.empty?
     end
+    
+    render json: {success: true}
   end
 end
 ```

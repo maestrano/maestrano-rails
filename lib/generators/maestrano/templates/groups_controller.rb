@@ -30,7 +30,7 @@ class Maestrano::Account::GroupsController < Maestrano::Rails::WebHookController
     # end
     #
     # organization.destroy
-    # render json: {success: true}, status: :success
+    # render json: {success: true}
     #
   end
 end
