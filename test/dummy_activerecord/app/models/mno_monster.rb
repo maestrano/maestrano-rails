@@ -4,6 +4,4 @@ class MnoMonster < ActiveRecord::Base
     user.last_name = maestrano.last_name
     user.email = maestrano.email
   end
-  
-  attr_accessible :email, :first_name, :last_name, :provider, :uid
 end
