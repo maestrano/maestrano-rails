@@ -31,6 +31,8 @@ For testing purpose we provide an API Sandbox where you can freely obtain an App
 
 To get started just go to: http://api-sandbox.maestrano.io
 
+A **rails demo application** is also available: https://github.com/maestrano/demoapp-rails
+
 ## Getting Started
 
 maestrano-rails works with Rails 3.2 onwards. You can add it to your Gemfile with:
