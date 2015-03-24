@@ -115,6 +115,13 @@ This generator also adds a configuration block to your group model which looks l
 class Organization < ActiveRecord::Base
   maestrano_group_via :provider, :uid do |group,maestrano|
     group.name = maestrano.company_name || "Your Group"
+    
+    # group.principal_email = maestrano.email
+    # group.city = maestrano.city
+    # group.olson_tz = maestrano.timezone
+    # group.country_alpha2 = maestrano.country
+    # group.currency_code = maestrano.currency
+    # group.some_required_field = 'some-appropriate-default-value'
   end
   
   ...

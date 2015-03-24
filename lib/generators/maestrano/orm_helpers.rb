@@ -11,7 +11,7 @@ module Maestrano
     user.name = maestrano.first_name
     user.surname = maestrano.last_name
     user.email = maestrano.email
-    # user.company = maestrano.company_name
+    
     # user.country_alpha2 = maestrano.country
     # user.some_required_field = 'some-appropriate-default-value'
   end
