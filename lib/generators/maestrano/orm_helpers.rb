@@ -11,9 +11,9 @@ module Maestrano
     user.name = maestrano.first_name
     user.surname = maestrano.last_name
     user.email = maestrano.email
-    #user.company = maestrano.company_name
-    #user.country_alpha2 = maestrano.country
-    #user.some_required_field = 'some-appropriate-default-value'
+    # user.company = maestrano.company_name
+    # user.country_alpha2 = maestrano.country
+    # user.some_required_field = 'some-appropriate-default-value'
   end
 
 CONTENT
@@ -22,9 +22,12 @@ CONTENT
   # Enable Maestrano for this group
   maestrano_group_via :provider, :uid do |group, maestrano|
     group.name = (maestrano.company_name || "Default Group name")
-    #group.country_alpha2 = maestrano.country
-    #group.free_trial_end_at = maestrano.free_trial_end_at
-    #group.some_required_field = 'some-appropriate-default-value'
+    # group.principal_email = maestrano.email
+    # group.city = maestrano.city
+    # group.olson_tz = maestrano.timezone
+    # group.country_alpha2 = maestrano.country
+    # group.currency_code = maestrano.currency
+    # group.some_required_field = 'some-appropriate-default-value'
   end
 
 CONTENT
