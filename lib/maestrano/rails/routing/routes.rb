@@ -3,16 +3,14 @@ module ActionDispatch::Routing
     def maestrano_routes
       namespace :maestrano do
         scope module: :rails do
-          get '/metadata' => 'metadata#index'
+          get '/metadata', to: 'metadata#index'
+          get '/metadata/:tenant', to: 'metadata#index', as: 'tenant'
         end
-        
-        namespace :rails do
-          get '/maestrano/metadata'
-        end
-        
+
         namespace :auth do
           resources :saml, only:[] do
             get 'init', on: :collection
+            get 'init/:tenant', on: :collection, to: 'saml#init', as: 'tenant'
             post 'consume', on: :collection
           end
         end

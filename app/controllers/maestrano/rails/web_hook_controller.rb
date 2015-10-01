@@ -4,9 +4,9 @@ class Maestrano::Rails::WebHookController < ApplicationController
   
   private
     def authenticate_maestrano!
-      authorized = false
-      authenticate_with_http_basic do |app_id, api_token|
-        authorized = Maestrano.authenticate(app_id,api_token)
+      # Matches the credentials against the ones configured for the tenant preset
+      authorized = authenticate_with_http_basic do |app_id, api_token|
+        Maestrano[params[:tenant]].authenticate(app_id, api_token)
       end
       unless authorized
         render json: {error: 'Invalid credentials' }, status: :unauthorized

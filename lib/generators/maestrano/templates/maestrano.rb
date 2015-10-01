@@ -124,3 +124,12 @@ Maestrano.configure do |config|
   # config.webhook.account.groups_path = '/maestrano/account/groups/:id',
   # config.webhook.account.group_users_path = '/maestrano/account/groups/:group_id/users/:id',
 end
+
+# Example of multi-tenant configuration
+Maestrano['other-tenant'].configure do |config|
+  config.environment = 'test'
+  config.app.host = (config.environment == 'production' ? 'https://my-app.com' : 'http://localhost:3000')
+  
+  config.api.id = (config.environment == 'production' ? 'prod_app_id' : 'sandbox_app_id')
+  config.api.key = (config.environment == 'production' ? 'prod_api_key' : 'sandbox_api_key')
+end
