@@ -1,5 +1,7 @@
 <p align="center">
 <img src="https://raw.github.com/maestrano/maestrano-rails/master/maestrano.png" alt="Maestrano Logo">
+<br/>
+<br/>
 </p>
 
 Maestrano Cloud Integration is currently in closed beta. Want to know more? Send us an email to <contact@maestrano.com>.
@@ -28,6 +30,8 @@ Before integrating with us you will need an App ID and API Key. Maestrano Cloud 
 For testing purpose we provide an API Sandbox where you can freely obtain an App ID and API Key. The sandbox is great to test single sign-on and API integration (e.g: billing API).
 
 To get started just go to: http://api-sandbox.maestrano.io
+
+A **rails demo application** is also available: https://github.com/maestrano/demoapp-rails
 
 ## Getting Started
 
@@ -77,7 +81,7 @@ class User < ActiveRecord::Base
     user.name = maestrano.first_name
     user.surname = maestrano.last_name
     user.email = maestrano.email
-    #user.company = maestrano.company_name
+    
     #user.country_alpha2 = maestrano.country
     #user.some_required_field = 'some-appropriate-default-value'
   end
@@ -111,6 +115,13 @@ This generator also adds a configuration block to your group model which looks l
 class Organization < ActiveRecord::Base
   maestrano_group_via :provider, :uid do |group,maestrano|
     group.name = maestrano.company_name || "Your Group"
+    
+    # group.principal_email = maestrano.email
+    # group.city = maestrano.city
+    # group.olson_tz = maestrano.timezone
+    # group.country_alpha2 = maestrano.country
+    # group.currency_code = maestrano.currency
+    # group.some_required_field = 'some-appropriate-default-value'
   end
   
   ...

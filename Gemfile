@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem 'rails'
 gem 'jquery-rails'
-gem 'maestrano'
+gem 'maestrano', '~> 0.11.0'
 
 group :test do
   gem 'test-unit'
