@@ -31,6 +31,7 @@ module ActiveRecord
       ## User source identification fields
       t.string :provider
       t.string :uid
+      t.string :tenant
 RUBY
       end
     end
