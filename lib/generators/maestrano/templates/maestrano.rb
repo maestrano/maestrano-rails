@@ -52,7 +52,7 @@ Maestrano.configure do |config|
   # generated when you run 'rake maestrano:install' and is available at
   # <rails_root>/app/controllers/maestrano/auth/saml.rb
   #
-  # config.sso.init_path = '/maestrano/auth/saml/init'
+  config.sso.init_path = '/maestrano/auth/saml/init/default'
   
   # ==> SSO Consumer endpoint
   # This is your application path to the SAML endpoint that allows users to
@@ -63,7 +63,7 @@ Maestrano.configure do |config|
   # generated when you run 'rake maestrano:install' and is available at
   # <rails_root>/app/controllers/maestrano/auth/saml.rb
   #
-  # config.sso.consume_path = '/maestrano/auth/saml/consume'
+  config.sso.consume_path = '/maestrano/auth/saml/consume/default'
   
   # ==> Single Logout activation
   # Enable/Disable single logout. When troubleshooting authentication issues
@@ -121,8 +121,8 @@ Maestrano.configure do |config|
   # you run 'rake maestrano:install' and is available under
   # <rails_root>/app/controllers/maestrano/account/
   #
-  # config.webhook.account.groups_path = '/maestrano/account/groups/:id',
-  # config.webhook.account.group_users_path = '/maestrano/account/groups/:group_id/users/:id',
+  config.webhook.account.groups_path = '/maestrano/account/groups/:id/default'
+  config.webhook.account.group_users_path = '/maestrano/account/groups/:group_id/users/:id/default'
 end
 
 # Example of multi-tenant configuration
@@ -132,4 +132,9 @@ Maestrano['other-tenant'].configure do |config|
   
   config.api.id = (config.environment == 'production' ? 'prod_app_id' : 'sandbox_app_id')
   config.api.key = (config.environment == 'production' ? 'prod_api_key' : 'sandbox_api_key')
+
+  config.sso.init_path = '/maestrano/auth/saml/init/other-tenant'
+  config.sso.consume_path = '/maestrano/auth/saml/consume/other-tenant'
+  config.webhook.account.groups_path = '/maestrano/account/groups/:id/other-tenant'
+  config.webhook.account.group_users_path = '/maestrano/account/groups/:group_id/users/:id/other-tenant'
 end

@@ -3,22 +3,19 @@ module ActionDispatch::Routing
     def maestrano_routes
       namespace :maestrano do
         scope module: :rails do
-          get '/metadata', to: 'metadata#index'
           get '/metadata/:tenant', to: 'metadata#index', as: 'tenant'
         end
 
         namespace :auth do
           resources :saml, only:[] do
-            get 'init', on: :collection
-            get 'init/:tenant', on: :collection, to: 'saml#init', as: 'tenant'
-            post 'consume', on: :collection
+            get 'init/:tenant', on: :collection, to: 'saml#init'
+            post 'consume/:tenant', on: :collection, to: 'saml#consume'
           end
         end
-        
+
         namespace :account do
-          resources :groups, only: [:destroy] do
-            resources :users, only: [:destroy], controller: 'group_users'
-          end
+          delete 'groups/:id/:tenant', to: 'groups#destroy'
+          delete 'groups/:group_id/users/:id/:tenant', to: 'group_users#destroy'
         end
       end
     end

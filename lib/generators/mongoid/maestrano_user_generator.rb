@@ -19,6 +19,7 @@ module Mongoid
   ## User source identification fields
   field :provider,  type: String, default: ""
   field :uid,       type: String, default: ""
+  field :tenant,    type: String, default: ""
 RUBY
       end
     end
