@@ -13,9 +13,9 @@ module Maestrano
       module ClassMethods
         # Configure a user model with mapping to SSO fields
         # and add user behaviour
-        def maestrano_user_via(provider_field,uid_field, &block)
+        def maestrano_user_via(provider_field, uid_field, tenant_field, &block)
           extend Maestrano::Rails::MaestranoAuthResource::LocalClassGenericMethods
-          self.maestrano_generic_configurator(provider_field,uid_field, &block)
+          self.maestrano_generic_configurator(provider_field, uid_field, tenant_field, &block)
           
           include Maestrano::Rails::MaestranoAuthResource::LocalInstanceUserMethods
           
@@ -27,9 +27,9 @@ module Maestrano
         
         # Configure a group model with mapping to SSO fields
         # and add group behaviour
-        def maestrano_group_via(provider_field,uid_field, &block)
+        def maestrano_group_via(provider_field, uid_field, tenant_field, &block)
           extend Maestrano::Rails::MaestranoAuthResource::LocalClassGenericMethods
-          self.maestrano_generic_configurator(provider_field,uid_field, &block)
+          self.maestrano_generic_configurator(provider_field, uid_field, tenant_field, &block)
           
           include Maestrano::Rails::MaestranoAuthResource::LocalInstanceGroupMethods
         end
@@ -38,11 +38,12 @@ module Maestrano
       # Actual class methods - injected after behaviour 
       # has been added (don't polute the model scope)
       module LocalClassGenericMethods
-        def maestrano_generic_configurator(provider_field,uid_field, &block)
+        def maestrano_generic_configurator(provider_field, uid_field, tenant_field, &block)
           cattr_accessor :maestrano_options
           self.maestrano_options = {
             provider: provider_field.to_s,
             uid: uid_field.to_s,
+            tenant: tenant_field.to_s,
             mapping: block
           }
           
@@ -51,11 +52,12 @@ module Maestrano
         
         # Find the resource based on provider and uid fields or create
         # it using the mapping block defined at the model level
-        def find_or_create_for_maestrano(auth_hash)
+        def find_or_create_for_maestrano(auth_hash, tenant='default')
           # Look for the entity first
           entity = self.where(
             self.maestrano_options[:provider].to_sym => auth_hash[:provider],
             self.maestrano_options[:uid].to_sym => auth_hash[:uid],
+            self.maestrano_options[:tenant].to_sym => tenant
           ).first
           
           # Create it otherwise
@@ -78,11 +80,12 @@ module Maestrano
             end
             
             # Call mapping block
-            self.maestrano_options[:mapping].call(entity,info,extra)
+            self.maestrano_options[:mapping].call(entity, info, extra)
             
-            # Finally set provider and uid then save
-            entity.send("#{self.maestrano_options[:provider]}=",auth_hash[:provider])
-            entity.send("#{self.maestrano_options[:uid]}=",auth_hash[:uid])
+            # Finally set provider, uid and tenant then save
+            entity.send("#{self.maestrano_options[:provider]}=", auth_hash[:provider])
+            entity.send("#{self.maestrano_options[:uid]}=", auth_hash[:uid])
+            entity.send("#{self.maestrano_options[:tenant]}=", tenant)
             entity.save!
           end
           

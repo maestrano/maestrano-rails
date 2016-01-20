@@ -12,12 +12,12 @@ class MaestranoUserViaTest < ActiveSupport::TestCase
     
     context "find_or_create_for_maestrano class method" do
       should "return the MnoMonster if it exists" do
-        m = MnoMonster.create(first_name: "John", last_name: "Jack", email: "monster@co.com", provider: 'maestrano', uid: 'usr-1')
+        m = MnoMonster.create(first_name: "John", last_name: "Jack", email: "monster@co.com", provider: 'maestrano', uid: 'usr-1', tenant: 'default')
         assert_equal m, MnoMonster.find_or_create_for_maestrano({provider: 'maestrano', uid: 'usr-1'})
       end
       
       should "not return a MnoMonster from another provider if it exists" do
-        m = MnoMonster.create(first_name: "John", last_name: "Jack", email: "monster@co.com", provider: 'someoneelse', uid: 'usr-1')
+        m = MnoMonster.create(first_name: "John", last_name: "Jack", email: "monster@co.com", provider: 'someoneelse', uid: 'usr-1', tenant: 'default')
         assert_not_equal m, MnoMonster.find_or_create_for_maestrano({provider: 'maestrano', uid: 'usr-1'})
       end
       
