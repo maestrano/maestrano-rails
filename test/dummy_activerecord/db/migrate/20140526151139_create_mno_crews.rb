@@ -4,6 +4,7 @@ class CreateMnoCrews < ActiveRecord::Migration
       t.string :name
       t.string :provider
       t.string :uid
+      t.string :tenant
 
       t.timestamps
     end

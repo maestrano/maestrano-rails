@@ -1,6 +1,6 @@
 class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
   
-  #== POST '/maestrano/auth/saml/consume'
+  #== POST '/maestrano/auth/saml/consume/:tenant'
   # Final phase of the Single Sign-On handshake. Find or create
   # the required resources (user and group) and sign the user
   # in
@@ -24,6 +24,11 @@ class Maestrano::Auth::SamlController < Maestrano::Rails::SamlBaseController
     ### --
     # user = User.find_or_create_for_maestrano(user_auth_hash)
     # organization = Organization.find_or_create_for_maestrano(group_auth_hash)
+    #
+    # user.tenant = params[:tenant]
+    # user.save
+    # organization.tenant = params[:tenant]
+    # organization.save
     #
     #
     ### 2) Add the user to the group if not already a member

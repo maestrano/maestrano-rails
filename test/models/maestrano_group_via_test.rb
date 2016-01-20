@@ -12,12 +12,12 @@ class MaestranoGroupViaTest < ActiveSupport::TestCase
     
     context "find_or_create_for_maestrano class method" do
       should "return the MnoCrew if it exists" do
-        m = MnoCrew.create(name: "SomeCrew",provider: 'maestrano', uid: 'cld-1')
+        m = MnoCrew.create(name: "SomeCrew",provider: 'maestrano', uid: 'cld-1', tenant: 'default')
         assert_equal m, MnoCrew.find_or_create_for_maestrano({provider: 'maestrano', uid: 'cld-1'})
       end
       
       should "not return a MnoCrew from another provider if it exists" do
-        m = MnoCrew.create(name: "SomeOtherCrew", provider: 'someoneelse', uid: 'usr-1')
+        m = MnoCrew.create(name: "SomeOtherCrew", provider: 'someoneelse', uid: 'usr-1', tenant: 'default')
         assert_not_equal m, MnoCrew.find_or_create_for_maestrano({provider: 'maestrano', uid: 'cld-1'})
       end
       

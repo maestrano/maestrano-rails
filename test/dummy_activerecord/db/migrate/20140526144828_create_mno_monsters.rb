@@ -6,6 +6,7 @@ class CreateMnoMonsters < ActiveRecord::Migration
       t.string :email
       t.string :provider
       t.string :uid
+      t.string :tenant
 
       t.timestamps
     end

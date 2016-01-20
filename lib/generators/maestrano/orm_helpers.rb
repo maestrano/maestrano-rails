@@ -7,7 +7,7 @@ module Maestrano
         if model_type == 'user'
           buffer = <<-CONTENT
   # Enable Maestrano for this user
-  maestrano_user_via :provider, :uid do |user,maestrano|
+  maestrano_user_via :provider, :uid, :tenant do |user,maestrano|
     user.name = maestrano.first_name
     user.surname = maestrano.last_name
     user.email = maestrano.email
@@ -20,7 +20,7 @@ CONTENT
         else
           buffer = <<-CONTENT
   # Enable Maestrano for this group
-  maestrano_group_via :provider, :uid do |group, maestrano|
+  maestrano_group_via :provider, :uid, :tenant do |group, maestrano|
     group.name = (maestrano.company_name || "Default Group name")
     # group.principal_email = maestrano.email
     # group.city = maestrano.city

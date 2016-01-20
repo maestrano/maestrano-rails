@@ -1,9 +1,10 @@
 class Maestrano::Account::GroupsController < Maestrano::Rails::WebHookController
   
-  # DELETE /maestrano/account/groups/cld-1
+  # DELETE /maestrano/account/groups/cld-1/:tenant
   # Delete an entire group
   def destroy
     group_uid = params[:id]
+    tenant = params[:tenant]
     
     # Perform deletion steps here
     # --
@@ -15,7 +16,7 @@ class Maestrano::Account::GroupsController < Maestrano::Rails::WebHookController
     # that group
     # --
     # E.g:
-    # organization = Organization.find_by_provider_and_uid('maestrano',group_uid)
+    # organization = Organization.find_by_tenant_and_uid(tenant, group_uid)
     #
     # amount_cents = organization.calculate_total_due_remaining
     # Maestrano::Account::Bill.create({

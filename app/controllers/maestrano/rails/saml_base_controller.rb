@@ -3,12 +3,10 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
   protect_from_forgery :except => [:consume]
   around_filter :saml_response_transaction, only: [:consume]
   
-  # GET /maestrano/auth/saml/init
   # GET /maestrano/auth/saml/init/:tenant
   #
   # Initialize the SAML request and redirects the user to Maestrano
   def init
-    session[:tenant] = params[:tenant]
     redirect_to Maestrano::Saml::Request[params[:tenant]].new(params, session).redirect_url
   end
   
