@@ -30,7 +30,7 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
   
   def process_saml_response
     if params[:SAMLResponse]
-      @saml_response = Maestrano::Saml::Response.new(params[:SAMLResponse])
+      @saml_response = Maestrano::Saml::Response[params[:tenant]].new(params[:SAMLResponse])
       if @saml_response.validate!
         @user_auth_hash = Maestrano::SSO::BaseUser.new(@saml_response).to_hash
         @group_auth_hash = Maestrano::SSO::BaseGroup.new(@saml_response).to_hash
