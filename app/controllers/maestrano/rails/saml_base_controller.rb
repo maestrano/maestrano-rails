@@ -22,7 +22,8 @@ class Maestrano::Rails::SamlBaseController < ApplicationController
       if Rails.env.development?
         raise
       else
-        logger.error e
+        logger.error "Cannot validate SAML response: #{e.message}"
+        logger.debug "Trace: #{e.backtrace}"
         redirect_to "#{Maestrano::SSO.unauthorized_url}?err=internal"
       end
     end
