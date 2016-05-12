@@ -7,3 +7,4 @@ test/dummy_*/tmp/
 test/dummy_*/.sass-cache
 test/tmp/
 *.gem
+Gemfile.lock
