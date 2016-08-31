@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+ - 2.1
+ - 2.2
+ - 2.3
+before_install:
+  - gem install bundler # Update bundler version
+script:
+  - cd test/dummy_activerecord
+  - bundle exec rake db:drop dbh:create db:migrate
+  - cd ../..
+  - bundle exec rake

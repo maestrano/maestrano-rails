@@ -35,7 +35,7 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = "Rails plugin for Maestrano API"
   gem.description = "Maestrano is the next generation marketplace for SME applications. See https://maestrano.com for details."
-  
+
   gem.email = ["arnaud.lachaume@maestrano.com"]
   gem.authors = ["Arnaud Lachaume"]
 
@@ -43,6 +43,5 @@ Jeweler::Tasks.new do |gem|
   gem.test_files = FileList['test/**/*']
 end
 Jeweler::RubygemsDotOrgTasks.new
-
 
 task :default => :test

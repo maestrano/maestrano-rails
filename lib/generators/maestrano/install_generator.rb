@@ -1,5 +1,3 @@
-require_relative 'initializer_generator'
-
 module Maestrano
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
@@ -7,7 +5,7 @@ module Maestrano
       desc "Creates a Maestrano initializer and a customizable controller for SAML Single Sign-On"
 
       def copy_initializer
-        Maestrano::Generators::InitializerGenerator.new('maestrano:initializer').invoke_all
+        template "maestrano.rb", "config/initializers/maestrano.rb"
       end
 
       def copy_saml_controller
