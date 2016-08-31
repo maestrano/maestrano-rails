@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem 'rails'
 gem 'jquery-rails'
 gem 'haml-rails'
+gem 'mongoid', require: false
 
 gem 'maestrano', '1.0.0.pre.RC1'
 
