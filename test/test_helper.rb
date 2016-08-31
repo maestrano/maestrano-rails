@@ -30,7 +30,7 @@ class ActiveSupport::TestCase
   if TEST_ORM == :active_record
     self.use_transactional_fixtures = false
   end
-    
+
   setup { DatabaseCleaner.start }
   teardown { DatabaseCleaner.clean }
 end
