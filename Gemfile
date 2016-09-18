@@ -5,7 +5,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'mongoid', require: false
 
-gem 'maestrano', '1.0.0.pre.RC4'
+gem 'maestrano', '1.0.0.pre.RC5'
 
 group :development, :test do
   gem 'sqlite3', :platforms => :ruby
