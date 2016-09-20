@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
-gem 'rails'
+gem 'rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'mongoid', require: false
 
-gem 'maestrano', '1.0.0.pre.RC5'
+gem 'maestrano', '1.0.0.pre.RC6'
 
 group :development, :test do
   gem 'sqlite3', :platforms => :ruby
