@@ -5,11 +5,11 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'mongoid', require: false
 
-gem 'maestrano', '1.0.0.pre.RC7'
+gem 'maestrano', '1.0.0.pre.RC8'
 
 group :development, :test do
-  gem 'sqlite3', :platforms => :ruby
-  gem 'activerecord-jdbcsqlite3-adapter', github: 'jruby/activerecord-jdbc-adapter', branch: 'rails-5', :platforms => :jruby
+  gem 'sqlite3', platforms: :ruby
+  gem 'activerecord-jdbcsqlite3-adapter', github: 'jruby/activerecord-jdbc-adapter', branch: 'rails-5', platforms: :jruby
 end
 
 group :development do
@@ -25,6 +25,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg', :platforms => :ruby
-  gem 'activerecord-jdbcpostgresql-adapter', github: 'jruby/activerecord-jdbc-adapter', branch: 'rails-5', :platforms => :jruby
+  gem 'pg', platforms: :ruby
+  gem 'activerecord-jdbcpostgresql-adapter', github: 'jruby/activerecord-jdbc-adapter', branch: 'rails-5', platforms: :jruby
 end
