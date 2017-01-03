@@ -25,11 +25,8 @@ Maestrano Cloud Integration is currently in closed beta. Want to know more? Send
 
 
 ## Getting Setup
-Before integrating with us you will need an App ID and API Key. Maestrano Cloud Integration being still in closed beta you will need to contact us beforehand to gain production access.
-
-For testing purpose we provide an API Sandbox where you can freely obtain an App ID and API Key. The sandbox is great to test single sign-on and API integration (e.g: billing API).
-
-To get started just go to: http://api-sandbox.maestrano.io
+To start the integration of your application with the Maestrano platform, you first need to register your application on our Developer Platform. You can find [more information here](https://maestrano.atlassian.net/wiki/x/NYA3Ag)
+Once your application is registered, you will be provided with API keys that are used to configure your application on the different marketplaces powered by Maestrano.
 
 A **rails demo application** is also available: https://github.com/maestrano/demoapp-rails
 
@@ -53,7 +50,7 @@ After you install Maestrano and add it to your Gemfile, you need to run the gene
 rails generate maestrano:install
 ```
 
-The generator will install an initializer which describes ALL Maestrano's configuration options. You will need to take a look at it as this is where you set your API key. This configuration will also be used to automatically generate a '/maestrano/metadata' endpoint in your application that Maestrano will fetch automatically at regular intervals (or by hitting 'refresh metadata' in your cloud partner dashboard on maestrano.com).
+The generator will install an initializer which describes Maestrano's configuration options.
 
 The generator also generates a SamlController for single sign-on that you will need to customize (see below) as well as the required routes.
 
@@ -279,6 +276,6 @@ So if you have any question or need help integrating with us just let us know at
 
 ## License
 
-MIT License. Copyright 2014 Maestrano Pty Ltd. https://maestrano.com
+MIT License. Copyright 2017 Maestrano Pty Ltd. https://maestrano.com
 
 You are not granted rights or licenses to the trademarks of Maestrano.

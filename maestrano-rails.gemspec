@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.md",
     "Rakefile",
-    "app/controllers/maestrano/rails/metadata_controller.rb",
     "app/controllers/maestrano/rails/saml_base_controller.rb",
     "app/controllers/maestrano/rails/web_hook_controller.rb",
     "lib/generators/active_record/maestrano_group_generator.rb",

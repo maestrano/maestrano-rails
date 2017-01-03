@@ -2,14 +2,6 @@ module ActionDispatch::Routing
   class Mapper
     def maestrano_routes
       namespace :maestrano do
-        scope module: :rails do
-          # GET /maestrano/metadata
-          get '/metadata', to: 'metadata#index'
-
-          # GET /maestrano/metadata/mytenant
-          get '/metadata/:tenant', to: 'metadata#index'
-        end
-
         namespace :auth do
           resources :saml, only:[] do
             # GET /maestrano/auth/saml/init
