@@ -54,6 +54,8 @@ module Dummy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.secret_key_base = '0331e8ad0958a0479a24dd8efbffb4aec1c34f9650f5d0b97e68f454bf27912018ef77b611d170d7273ffbcc32fff0474e718f5621ab3809c19f9ae931b332b3'
   end
 end
 

@@ -18,7 +18,7 @@ module Maestrano
         # triggers a Maestrano SSO handshake
         def verify_maestrano_session
           if Maestrano[session_preset].param(:sso_enabled)
-            unless controller_name == 'saml' && ['init','consume'].include?(action_name)
+            unless controller_name == 'saml' && ['init', 'consume'].include?(action_name)
               if !Maestrano::SSO::Session[session_preset].new(session).valid?(if_session:true)
                 redirect_to Maestrano::SSO[session_preset].init_url
               end

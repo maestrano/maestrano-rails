@@ -12,6 +12,11 @@ group :development, :test do
   gem 'activerecord-jdbcsqlite3-adapter', github: 'jruby/activerecord-jdbc-adapter', branch: 'rails-5', platforms: :jruby
 end
 
+group :development, :test do
+  gem 'brakeman', require: false
+  gem 'simplecov', require: false
+end
+
 group :development do
   gem 'jeweler'
 end

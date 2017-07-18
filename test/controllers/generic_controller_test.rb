@@ -6,7 +6,10 @@ class GenericControllerTest < ActionController::TestCase
   context "with a maestrano session" do
     setup do
       @original_sso_value = Maestrano.param(:sso_enabled)
-      Maestrano.configure { |config| config.sso_enabled = true }
+      Maestrano.configure do |config|
+        config.sso_enabled = true
+        config.sso.slo_enabled = true
+      end
 
       @request.session[:maestrano] = Base64.encode64({
         uid: 'usr-1',
@@ -23,7 +26,7 @@ class GenericControllerTest < ActionController::TestCase
     should "be successful if the maestrano session is still valid" do
       sso_session = mock('maestrano_sso_session')
       sso_session.stubs(:valid?).returns(true)
-      Maestrano::SSO::Session.stubs(:new).returns(sso_session)
+      Maestrano::SSO::Session[Maestrano.configs.keys.first].stubs(:new).returns(sso_session)
       get :home
       assert_response :success
     end
@@ -32,6 +35,7 @@ class GenericControllerTest < ActionController::TestCase
       sso_session = mock('maestrano_sso_session')
       sso_session.stubs(:valid?).returns(false)
       Maestrano::SSO::Session.stubs(:new).returns(sso_session)
+      Maestrano::SSO::Session[Maestrano.configs.keys.first].stubs(:new).returns(sso_session)
       get :home
       assert_redirected_to Maestrano::SSO.init_url
     end
@@ -40,7 +44,7 @@ class GenericControllerTest < ActionController::TestCase
       Maestrano.configure { |config| config.sso_enabled = false }
       sso_session = mock('maestrano_sso_session')
       sso_session.stubs(:valid?).returns(false)
-      Maestrano::SSO::Session.stubs(:new).returns(sso_session)
+      Maestrano::SSO::Session[Maestrano.configs.keys.first].stubs(:new).returns(sso_session)
       get :home
       assert_response :success
     end

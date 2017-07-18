@@ -1,4 +1,7 @@
 # Configure Rails Environment
+require 'simplecov'
+SimpleCov.start
+
 ENV["RAILS_ENV"] = "test"
 TEST_ORM = (ENV["TEST_ORM"] || :active_record).to_sym
 
@@ -46,4 +49,6 @@ Maestrano.configure do |config|
   config.api.id = 'id'
   config.api.key = 'key'
   config.api.host = 'host'
+  config.sso_enabled = true
+  config.sso.slo_enabled = true
 end

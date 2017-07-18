@@ -44,4 +44,8 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-task :default => :test
+# require 'lib/tasks/brakeman'
+Dir.glob('lib/tasks/*.rake').each { |r| load r}
+
+
+task default: [:test, 'brakeman:run']
