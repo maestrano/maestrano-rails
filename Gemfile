@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-gem 'rails', '~> 4.2'
-gem 'jquery-rails'
+gem 'rails', '~> 4.2.9'
+gem 'jquery-rails', '~> 4.3.1'
 gem 'haml-rails'
 gem 'mongoid', require: false
 
